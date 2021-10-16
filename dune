@@ -1,0 +1,6 @@
+(executable (name DataStructures) (libraries Lib))
+
+;(executable
+; (name dataStructures)
+; (modes byte exe))
+; (test (name tests)  (libraries OUnit))
