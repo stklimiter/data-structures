@@ -1,2 +1,2 @@
 
-let _ =  BankersQeue_test.run_all();
+let _ =  BankersQueue_test.run_all();
