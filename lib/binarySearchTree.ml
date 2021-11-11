@@ -7,6 +7,9 @@ module type Set =
         val empty : set
 (*        val insert : elem -> set -> set*)
         val member : elem -> set -> bool
+
+        val insert : elem -> set -> set
+
     end
 
 module type Ordered =
@@ -19,15 +22,24 @@ module type Ordered =
 (*  Equal or lesser than *)
   end
 
-module BinarySearchTree (Element: Ordered) : Set  = struct
+module BinarySearchTree (Element: Ordered): Set   = struct
 type elem = Element.t
 type tree = E  | T of tree * elem * tree
 type set = tree
-
 let empty = E
 (*let insert  e s  = s*)
-let member e s = match s
+let rec member e s = match s with
                 | E -> false
-                | (l, i, r) -> member (e, T(a, y, b)) = if Element.lt )
+                | T(l, i, r) ->
+                                if (Element.lt e i) then (member e l)
+                                else if (Element.lt i e) then (member e r)
+                                else true
+
+let rec insert e s = match s with
+                  | E -> T(E, e, E)
+                  | T(l, i, r) ->
+                                if (Element.lt e i) then T((insert e l), i, r)
+                                else if (Element.lt i e) then T(l, i, (insert e r))
+                                else s
 
 end
